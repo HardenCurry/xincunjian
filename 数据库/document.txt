@@ -1,0 +1,1 @@
+"dnum"	"time"	"date"	"fnum"	"weight"	"unum"	"energy"
