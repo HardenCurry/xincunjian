@@ -1,338 +1,232 @@
 <!DOCTYPE html>
-<html lang="zh">
-
+<html>
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>知卡知热——热量查询</title>
-    <meta name="keywords" content="食物热量" />
-    <meta name="verify-v1" content="WPvgwdf4aqsujE8987ZHPpBNvtHguD/yT9AaQdi784c=" />
-    <meta name="mobile-agent" content="format=xhtml;url=http://m.boohee.com">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core_v2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/food_v2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.4.6.min.css') }}">
 
-
-    <link enablehash="true" href="food_v2.css" media="screen" rel="stylesheet" type="text/css" />
+    {% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
     <style>
-        footer {
-            margin-top: 200px !important;
+        .main_image {
+            position: relative;
         }
 
-        @media (min-width: 1px) {
-            .container {
-                width: 990px
-            }
-        }
+        .main_image_text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-weight: bold;
+            font-family: 'PingFang SC', 'Microsoft YaHei';
+            color: white;
 
-        @media (min-width: 1px) {
-            .container {
-                width: 990px
-            }
-        }
-
-        @media (min-width: 1330px) {
-            .container {
-                width: 1200px
-            }
-        }
-    </style>
-
-    <script>
-        var _hmt = _hmt || [];
-        _hmt.push(['_setCustomVar', 1, 'login', '0', 2]);
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?7263598dfd4db0dc29539a51f116b23a";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-
-    </script>
-
-    <script type="text/javascript">
-        try {
-            window._BH_RESPONSE = {} || {};
-        } catch (e) { }
-    </script>
-    <style>
-        html,
-        body {
-            font: normal normal 100%/normal -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, 'Nimbus Sans L', Arial, 'Liberation Sans', 'Hiragino Sans GB', 'Source Han Sans CN', 'Source Han Sans SC', 'Wenquanyi Micro Hei', 'WenQuanYi Zen Hei', 'ST Heiti', SimHei, 'WenQuanYi Zen Hei Sharp', sans-serif;
-        }
-
-        footer {
-            margin-top: 200px !important;
         }
     </style>
 </head>
 
 <body>
-    <div id="wrapper">
-      <div id="top">
-        
-      </div>
-      <div id="header">
-        
-    <div class="page-food-category">
-      <hr class="hide" data-page="food-category">
-    
-      <header>
-        <div class="clearfix row" style="width: 1200px;">
-          <style>
-            nav-menu{
-              float:right;
-              width:25%
-            }
-          </style>
-          <div class="nav-menu">
-            <a href="/" class="no-pl">
-              <i class="logo"></i>
-            </a>
-          </div>
-    
-          <nav class="right clearfix nav">
-            <div class="nav-menu ">
-              <a href="/" class="clean-link">
-                首页
-                <i class="separator"></i>
-              </a>
-            </div>
-    
-            <div class="nav-menu ">
-              <a href="/apps/boohee" class="clean-link">
-                热量查询
-                <i class="separator"></i>
-              </a>
-            </div>
-    
-            <div class="nav-menu ">
-              <a href="/boohee/members" class="clean-link">
-                每日记录
-                <i class="separator"></i>
-              </a>
-            </div>
-    
-            <div class="nav-menu ">
-              <a href="/boohee/food" class="clean-link">
-                检索历史
-                <i class="separator"></i>
-              </a>
-            </div>
-
-            <div class="nav-menu search">
-              <a href="/food" class="clean-link">
-                <i class="icon-btn"></i>
-              </a>
-            </div>
-    
-    
-          </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" style="font-size: 20px;font-weight: bold;">懂你的胃</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ml-2">
+                    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+                        <input class="form-control mr-sm-2" type="search" placeholder="查食品" aria-label="Search"
+                               name="q">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user %}
+                    <li class="nav-item">
+                        <span class="nav-link">{{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" href="">记录页面</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">退出登录</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">注册</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-      </header>
-        
-      <style>
-        #footer {
-          padding-bottom: 37px;
-        }
-        .foot-banner {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-        }
-        .foot-banner > img {
-          width: 100%;
-          height: 45px;
-        }
-        .footer-banner-modal {
-          display: none;
-          position: fixed;
-          z-index: 1;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden; /* Enable scroll if needed */
-          background-color: rgb(0,0,0); /* Fallback color */
-          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        .widget-tools > .container {
-          padding-bottom: 0;
-          background: inherit;
-        }
-        .widget-tools > .container > p {
-          margin: 0 0 13px;
-          color: #333;
-          font-size: 14px;
-        }
-        .footer-banner-modal > img {
-          margin: calc(50vh - 130px) calc(50vw - 130px);
-        }
-      </style>
-      <script>
-          document.addEventListener('DOMContentLoaded', function () {
-              var footBanner = document.getElementsByClassName('foot-banner')[0]
-              var footBannerModal = document.getElementsByClassName('footer-banner-modal')[0];
-              footBanner.addEventListener('click', function() {
-                  footBannerModal.style.display = 'block'
-              })
-    
-              footBannerModal.addEventListener('click', function (e) {
-                  if (e.target.style.display == 'block') {
-                      e.target.style.display = 'none'
-                  }
-              })
-          })
-      </script>
-    
-      </div>
-      <div id="main">
-        
-    
-      <form class="relative x-adjustable-img text-center food-database-section">
-      <img alt="薄荷" src="http://up.boohee.cn/house/u/site/pc/index/food-database-bg.png" class="xy-center">
-    
-    
-      <h1 align="center">天天有营养，人人享健康——懂你的胃</h1>
-
-      <div class="box">
-          <input type="text" class="input" placeholder="知卡知热食物热量库，吃前查一查，饮食更健康">
-          <a href="#" class="hide-text text-center clean-link left table btn-search">
-              <input type="button" value="搜索" class="button">
-          </a>
-      </div>
-      <style>
-          .box{
-          width:500px;
-          height:40px;
-          border:2px solid rgb(73, 103, 73);
-          margin:auto;
-      }
-      .input{
-          float:left;
-          width:400px;
-          height:38px;
-          outline:none;
-          border:none;
-      }
-      .button{
-          float:left;
-          width:96px;
-          height:40px;
-          color:white;
-          background-color:rgb(73, 103, 73);
-          border:none;
-          outline:none;
-      }                        
-      </style>
-    
-      </div>
-    </form>
-        <div class="widget-food-category">
-        <div class="container">
-          <div class="widget-page-title">
-            <h2 align="center"><span></span>常见食物分类<span></span></h2>
-          </div>
-            <ul class="row">
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/1"><img src="http://s.boohee.cn/images/food/category/1.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/1">主食</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/2"><img src="http://s.boohee.cn/images/food/category/2.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/2">肉类蛋类</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/3"><img src="http://s.boohee.cn/images/food/category/3.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/3">坚果豆类奶类</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/4"><img src="http://s.boohee.cn/images/food/category/4.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/4">水果</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/5"><img src="http://s.boohee.cn/images/food/category/5.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/5">蔬菜</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/6"><img src="http://s.boohee.cn/images/food/category/6.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/6">调味品</a></h3>
-                </div>
-          </li>
-          <li class="col-md-4 col-sm-4 col-xs-12 item">
-                <div class="img-box"><a href="/food/group/7"><img src="http://s.boohee.cn/images/food/category/7.png"></a></div>
-                <div class="text-box">
-                  <h3><a href="/food/group/7">零食饮料</a></h3>
-                </div>
-          </li>
-      </ul>
-    
-        </div>
-      </div>
-
     </div>
+</nav>
+<div class="main_image">
+    <img alt="薄荷" src="http://up.boohee.cn/house/u/site/pc/index/food-database-bg.png" width="100%">
+    <h1 class="main_image_text">天天有营养，人人享健康</h1>
+</div>
 
-    <div id="footer">
-    </div>
-    <div id="ext">
-      
-      
-
-    
-    </div>
-    <script enablehash="true" src="https://www.boohee.com/javascripts/core_v2_844676abe8d02848ba970b6eec6e00e8.js?1684907650" type="text/javascript"></script>
-    
-      <script src="https://www.boohee.com/javascripts/food_v2_packaged.js?1684907650" type="text/javascript"></script>
-      <script type="text/javascript">
-          ;(function ($) {
-              $("#keyword").placeholder();
-          })(jQuery)
-    
-          $(document).ready(function() {
-            $('.btn-search').click(function() {
-              var data = $('#search-ipt').val();
-              window.location.href = "/food/search?keyword=" + data;
-            })
-    
-            var $frmSearchFood = $('.food-database-section');
-            $frmSearchFood.submit(e => {
-              e.preventDefault();
-              $('.btn-search').click();
-              // 取值、处理、验证、发送请求等从这里开展...
-            });
-          })
-      </script>
-    
-    
-    
-    <footer class="row">
-      <div class="padding-box footer">
-        <div>
-          <p class="text-center" align="center">
-            联系我们：请提出您的宝贵意见！
-          </p>
-
-          <p class="text-center" align="center">
-            邮箱：123456@163.com
-          </p>
-        </div>
-      </div>
-    </footer>
-    
-
-    
-
-
-    </div>
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
 </body>
+{#<div class="box">#}
+{#    <input type="text" class="input" placeholder="知卡知热食物热量库，吃前查一查，饮食更健康">#}
+{#    <a href="#" class="hide-text text-center clean-link left table btn-search">#}
+{#        <input type="button" value="搜索" class="button">#}
+{#    </a>#}
+{#</div>#}
+<style>
+    .box {
+        width: 500px;
+        height: 40px;
+        border: 2px solid rgb(73, 103, 73);
+        margin: auto;
+    }
+
+    .input {
+        float: left;
+        width: 400px;
+        height: 38px;
+        outline: none;
+        border: none;
+    }
+
+    .button {
+        float: left;
+        width: 96px;
+        height: 40px;
+        color: white;
+        background-color: rgb(73, 103, 73);
+        border: none;
+        outline: none;
+    }
+</style>
+
+</div>
+</form>
+<div class="widget-food-category">
+    <div class="container">
+        <div class="widget-page-title">
+            <h2 align="center">常见食物分类</h2>
+        </div>
+        <ul class="row">
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/1"><img
+                        src="http://s.boohee.cn/images/food/category/1.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/1" style="color: black;">主食</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/2"><img
+                        src="http://s.boohee.cn/images/food/category/2.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/2" style="color: black;">肉类蛋类</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/3"><img
+                        src="http://s.boohee.cn/images/food/category/3.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/3" style="color: black;">坚果豆类奶类</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/4"><img
+                        src="http://s.boohee.cn/images/food/category/4.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/4" style="color: black;">水果</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/5"><img
+                        src="http://s.boohee.cn/images/food/category/5.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/5" style="color: black;">蔬菜</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/6"><img
+                        src="http://s.boohee.cn/images/food/category/6.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/6" style="color: black;">调味品</a></h3>
+                </div>
+            </li>
+            <li class="col-md-4 col-sm-4 col-xs-12 item">
+                <div class="img-box"><a href="/food/group/7"><img
+                        src="http://s.boohee.cn/images/food/category/7.png"></a></div>
+                <div class="text-box">
+                    <h3><a href="/food/group/7" style="color: black;">零食饮料</a></h3>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+</div>
+{##}
+{#<div id="footer">#}
+{#</div>#}
+{#<div id="ext">#}
+{##}
+{##}
+{#</div>#}
+{#<script enablehash="true"#}
+{#        src="https://www.boohee.com/javascripts/core_v2_844676abe8d02848ba970b6eec6e00e8.js?1684907650"#}
+{#        type="text/javascript"></script>#}
+{##}
+{#<script src="https://www.boohee.com/javascripts/food_v2_packaged.js?1684907650" type="text/javascript"></script>#}
+{#<script type="text/javascript">#}
+{#    ;(function ($) {#}
+{#        $("#keyword").placeholder();#}
+{#    })(jQuery)#}
+{##}
+{#    $(document).ready(function () {#}
+{#        $('.btn-search').click(function () {#}
+{#            var data = $('#search-ipt').val();#}
+{#            window.location.href = "/food/search?keyword=" + data;#}
+{#        })#}
+{##}
+{#        var $frmSearchFood = $('.food-database-section');#}
+{#        $frmSearchFood.submit(e => {#}
+{#            e.preventDefault();#}
+{#            $('.btn-search').click();#}
+{#            // 取值、处理、验证、发送请求等从这里开展...#}
+{#        });#}
+{#    })#}
+{#</script>#}
+{##}
+{##}
+{#<footer class="row">#}
+{#    <div class="padding-box footer">#}
+{#        <div>#}
+{#            <p class="text-center" align="center">#}
+{#                联系我们：请提出您的宝贵意见！#}
+{#            </p>#}
+{##}
+{#            <p class="text-center" align="center">#}
+{#                邮箱：123456@163.com#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
+{##}
+{##}
+{#</div>#}
+{#</body>#}
+</html>
