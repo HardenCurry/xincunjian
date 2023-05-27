@@ -5,12 +5,11 @@ from datetime import datetime
 class User(db.Model):
     __tablename__ = 'user'
 
-    number = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'), primary_key=True, unique=True)
-    name = db.Column(db.String(255))
-    gender = db.Column(db.String(255))
-    password = db.Column(db.String(255))
-    zhanghao = db.Column(db.String(255))
-    phone = db.Column(db.String(255))
+    number = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    zhanghao = db.Column(db.String(255), nullable=False,unique=True)
+    gender = db.Column(db.String(255), nullable=False)
+    phone = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
 
 class Document(db.Model):
@@ -23,6 +22,7 @@ class Document(db.Model):
     weight = db.Column(db.String(255))
     unum = db.Column(db.String(255), index=True)
     energy = db.Column(db.String(255))
+
 
 # class Fencibiao(db.Model):
 #     __tablename__ = 'fencibiao'

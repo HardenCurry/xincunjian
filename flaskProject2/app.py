@@ -28,7 +28,5 @@ migrate=Migrate(app,db)
 def shouye():
     return render_template('shouye.html')
 
-
-
 if __name__ == '__main__':
     app.run()
