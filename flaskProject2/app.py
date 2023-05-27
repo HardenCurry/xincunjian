@@ -24,8 +24,9 @@ migrate=Migrate(app,db)
 #2.flask db migrate  识别orm改变生成迁移脚本
 #3.flask db upgrade 同步迁移脚本到数据库中
 
-
-
+@app.route("/")
+def shouye():
+    return render_template('shouye.html')
 
 
 
