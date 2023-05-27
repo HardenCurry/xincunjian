@@ -2,33 +2,10 @@
 
 {% block title %}index{% endblock %}
 {% block head %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/init.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/core_v2.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/food_v2.css') }}">
-    <style>
-        .main_image {
-            position: relative;
-        }
-
-        .main_image_text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: black;
-            font-weight: bold;
-            font-family: 'PingFang SC', 'Microsoft YaHei';
-            color: white;
-        }
-    </style>
-
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>谷薯芋、杂豆、主食食物热量 - 薄荷网 - 薄荷网</title>
     <meta name="keywords" content="谷薯芋、杂豆、主食食物热量，食物卡路里" />
     <meta name="keywords" content="食物热量查询，食物卡路里大全" />
     <meta name="verify-v1" content="WPvgwdf4aqsujE8987ZHPpBNvtHguD/yT9AaQdi784c=" />
@@ -107,23 +84,23 @@
         }
     </style>
     <script>
-        function liClick(str) {
-            document.getElementById("text1").innerHTML = str;
-            document.getElementById("text2").innerHTML = str;
+    function liClick(str) {
+        document.getElementById("text1").innerHTML = str;
+        document.getElementById("text2").innerHTML = str;
+    }
+    function changeClass(tagNumber) {
+        var elements = document.getElementsByClassName("pages");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove("current");
         }
-        function changeClass(tagNumber) {
-            var elements = document.getElementsByClassName("pages");
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].classList.remove("current");
-            }
-            elements[tagNumber - 1].classList.add("current");
-        }
-    </script>
+        elements[tagNumber - 1].classList.add("current");
+    }
+</script>
+
 {% endblock %}
 
 
 {% block body %}
-
     <div id="wrapper">
         <div id="top">
 
@@ -140,17 +117,24 @@
             <div id="main">
 
                 <div class="widget-group-content container">
-                    <h2 class="crumb"><a href="/food/">知卡知热</a> / <span id="text1">主食</span>
-                        <form  action="index1" method='POST' style="position: absolute; right:5%;">
+                    <h2 class="crumb"><a href="/food/">知卡知热</a> / <span id="text1">{{type}}</span>
+                     <form   method='POST' style="position: absolute; right:5%;">
                          按热量排序:
                          <button type="submit" name="paixu" value="升序" style="border:0;outline:none;background-color: transparent;">↑</button>
                          <button type="submit" name="paixu" value="降序" style="border:0;outline:none;background-color: transparent;">↓</button>
                      </form>
+</h2>
 
-                    </h2>
+
+
+
+
+
+
+
                     <div class="widget-group-bar">
                         <h3>常见食物分类</h3>
-                        <form action="index1" class="group-list" method='POST'>
+                         <form action="" class="group-list" method='POST'>
                             <li><a onclick="liClick('主食')" class="g1"><button type="submit" name="text" value="主食" style="border:0;outline:none;background-color: transparent;">主食</button></a></li>
                             <li><a onclick="liClick('肉类蛋类及制品')" class="g2"><button type="submit" name="text" value="肉类蛋类及制品" style="border:0;outline:none;background-color: transparent;">蛋类、肉类及制品</button></a></li>
                             <li><a onclick="liClick('坚果豆类奶类')" class="g3"><button type="submit"name="text" value="坚果豆类奶类" style="border:0;outline:none;background-color: transparent;">坚果豆类奶类</button></a></li>
@@ -166,7 +150,7 @@
                     </div>
 
                     <div class="widget-food-list pull-right">
-                        <h3 id="text2">主食
+                        <h3 id="text2">{{ type }}
                         </h3>
                         <!-- food group 页面添加页面缓存 -->
                         <ul class="food-list">
@@ -232,6 +216,6 @@
 
 
     <script src="//up.boohee.cn/house/u/site/pc/main.js"></script>
+
+
 {% endblock %}
-
-

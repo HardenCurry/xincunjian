@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session
 from exts import db
-from flask_mail import Message
+
 from flask import request
 import string
 import random
