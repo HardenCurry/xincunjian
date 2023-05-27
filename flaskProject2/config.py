@@ -1,3 +1,6 @@
+#session需要加密
+SECRET_KEY='asdafsadasdasd'
+
 HOSTNAME="localhost"
 PORT=3306
 USERNAME="root"
