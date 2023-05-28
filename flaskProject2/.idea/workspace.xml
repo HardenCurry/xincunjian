@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89fcda7a-fcc2-43a1-9068-b8cc378772fb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blueprint/search.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprint/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprint/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/document.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blueprint/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprint/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/food_v2.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/food_v2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprint/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/search2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/shouye.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shouye.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sol2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sol2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../数据库/fencibiao.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../数据库/fencibiao.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../数据库/fencifanwei.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../数据库/fencifanwei.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../数据库/food.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../数据库/food.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/信存检作业/xincunjian/flaskProject2/templates",
+    "last_opened_file_path": "D:/信存检作业/xincunjian/flaskProject2/blueprint",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,8 +67,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\信存检作业\xincunjian\flaskProject2\templates" />
       <recent name="D:\信存检作业\xincunjian\flaskProject2\blueprint" />
+      <recent name="D:\信存检作业\xincunjian\flaskProject2\templates" />
       <recent name="D:\信存检作业\xincunjian\flaskProject2" />
     </key>
   </component>
@@ -120,6 +108,8 @@
       <workItem from="1685198982187" duration="1981000" />
       <workItem from="1685204968305" duration="40000" />
       <workItem from="1685205917923" duration="1356000" />
+      <workItem from="1685236973588" duration="226000" />
+      <workItem from="1685245592487" duration="274000" />
     </task>
     <servers />
   </component>
@@ -139,6 +129,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject2$flaskProject2.coverage" NAME="flaskProject2 Coverage Results" MODIFIED="1685197144586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flaskProject2$flaskProject4.coverage" NAME="flaskProject4 覆盖结果" MODIFIED="1685207221311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/flaskProject2$flaskProject4.coverage" NAME="flaskProject4 覆盖结果" MODIFIED="1685245801346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
