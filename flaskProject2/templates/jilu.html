@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Document</title>
+    <style>
+        body {
+            font: normal normal 100%/normal -apple-system, 'PingFang SC', 'Microsoft YaHei';
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+
+        header {
+            margin-top: 3vh;
+            width: 100vw;
+            text-align: center;
+        }
+
+        header > #title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-left: 20vw;
+        }
+
+
+        header > #side {
+            float: right;
+            margin-right: 15vw;
+            margin-top: 2vh;
+            border: 2px solid gray;
+            padding: 0.5vw;
+        }
+
+        main {
+            margin: 5vw;
+        }
+
+        .box {
+            padding: 1vw;
+            padding-left: 3vw;
+            border: 1px solid lightgray;
+            border-bottom: 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .route-box {
+            margin-top: 1vh;
+            border: 1px solid lightgray;
+            width: 10vw;
+            height: 10vw;
+        }
+
+        .route-box-bottom {
+            text-align: center;
+            border: 1px solid lightgray;
+            border-top: 0;
+            padding-top: 0vw;
+            width: 10vw;
+            height: 2vw;
+            background-color: lightgray;
+        }
+        .route-box-upperright{
+        }
+
+        .box-right {
+            margin-top: 10vh;
+        }
+
+        .empty {
+            display: inline-block;
+            border: 1px solid lightgray;
+            padding: 2px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <span id="title">每日摄入记录</span>
+        <span id="side">总计 ：{{ all_energy }} kcal</span>
+    </header>
+    <main>
+        <div class="box">
+            <div class="box-left">
+                <form action={{ url_for('document.document') }} method="get">
+                    <button name='time' value="早">早餐</button>
+                    <button name='time' value="午">午餐</button>
+                    <button name='time' value="晚">晚餐</button>
+                </form>
+                <form action="http://127.0.0.1:5000/search/search2" method="POST">
+                    {% if foods %}
+                        {% for fname,fimg,fenergy in foods %}
+                            <button type="submit" name="food_list" disabled
+                                    style="border:0;outline:none;background-color: transparent;">
+                                <div class="route-box">{{ fname }}<br>
+                                    <img width='70px' src={{ fimg }}>
+                                </div>
+                                <div class="route-box-bottom">{{ fenergy }} 卡路里
+                                </div>
+                            </button>
+                        {% endfor %}
+                    {% endif %}
+                    <button type="submit" name="food_ct" value="0"
+                            style="border:0;outline:none;background-color: transparent;">
+                        <div class="route-box" style="font-weight: bold;">+</div>
+                        <div class="route-box-bottom"></div>
+                    </button>
+                </form>
+            </div>
+            <div class="box-right">{{ time }}餐: <span class="empty">{{ sum_energy }} kcal</span></div>
+        </div>
+    </main>
+{% endblock %}
