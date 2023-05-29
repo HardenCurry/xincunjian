@@ -168,6 +168,11 @@ def search():
             mylist = []
             for k in d:
                 mylist.append(k[0])
+            if mylist==[]:
+                content=session.get('search')
+                a=Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -320,7 +325,11 @@ def search():
             mylist=[]
             for k in d:
                 mylist.append(k[0])
-
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
             foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
             page = 1
             # 每页显示多少条
@@ -528,6 +537,13 @@ def search1():
                         mylist = []
                         for k in d:
                             mylist.append(k[0])
+                        for k in d:
+                            mylist.append(k[0])
+                        if mylist == []:
+                            content = session.get('search')
+                            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                            for k in a:
+                                mylist.append(k.fnum)
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -739,7 +755,13 @@ def search1():
                 mylist = []
                 for k in d:
                     mylist.append(k[0])
-
+                for k in d:
+                    mylist.append(k[0])
+                if mylist == []:
+                    content = session.get('search')
+                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                    for k in a:
+                        mylist.append(k.fnum)
                 foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                 page = 1
                 # 每页显示多少条
