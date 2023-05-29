@@ -16,7 +16,7 @@ class Document(db.Model):
 
     dnum = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.String(255))
-    date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime)   
     fnum = db.Column(db.String(255))
     weight = db.Column(db.Integer)
     zhanghao = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'), index=True)
