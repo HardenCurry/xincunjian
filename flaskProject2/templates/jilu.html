@@ -3,7 +3,7 @@
 {% block head %}
     <title>Document</title>
     <script>
-        function del_doc(){
+        function del_doc() {
             $('#del_form').submit()
         }
     </script>
@@ -64,12 +64,10 @@
             height: 2vw;
             background-color: lightgray;
         }
-        .route-box-upperright{
-        }
 
         .box-right {
             position: absolute;
-            right:100px
+            right: 100px
         }
 
         .empty {
@@ -77,6 +75,7 @@
             border: 1px solid lightgray;
             padding: 2px;
         }
+
     </style>
 {% endblock %}
 
@@ -92,31 +91,40 @@
                     <button name='time' value="早">早餐</button>
                     <button name='time' value="午">午餐</button>
                     <button name='time' value="晚">晚餐</button>
+                    <span style="font-weight: bold;padding-left: 10px;font-size: 20px">{{ time }}餐</span>
+                    <span style="font-weight: bold;padding-left: 15px;font-size: 13px">*所有单位为克/毫升</span>
                 </form>
                 <form action="" method="POST">
                     {% if foods %}
                         {% for fname,fimg,fenergy,fnum,weight in foods %}
                             <button type="submit" name="food_list" disabled
                                     style="border:0;outline:none;background-color: transparent;">
-                                <div class="route-box">{{ fname }}<br>
+                                <div class="route-box" style="color: black">{{ fname }}<br>
                                     <img width='70px' src={{ fimg }}>
                                 </div>
-                                <div class="route-box-bottom">{{ fenergy }} 卡路里
+                                <div class="route-box-bottom" style="color: black">{{ fenergy }} 卡路里
                                 </div>
                             </button>
-                            <button formaction="{{ url_for('document.del_doc')}}" name="fnum_btn" value='{{ fnum }}' style="right:10px;top:5px; position: relative">X</button>
-                            <input type="number" min=0 max=10000 name={{ fnum }} value="{{ weight }}" style="position: relative;top: 120px;right: 35px;width: 60px">
-                            <button formaction="{{ url_for('document.update_weight')}}" name="fnum_btn2" value='{{ fnum }}' style="position: relative;top: 120px;right: 35px;">修改</button>
+
+                            <button formaction="{{ url_for('document.del_doc') }}" name="fnum_btn" value='{{ fnum }}'
+                                    style="right:10px;top:2px; position: relative;border-radius:7px;background: white;font-weight: bold;">X
+                            </button>
+                            <input type="number" min=0 max=10000 name={{ fnum }} value="{{ weight }}"
+                                   style="position: relative;top: 120px;right: 35px;width: 60px">
+                            <button formaction="{{ url_for('document.update_weight') }}" name="fnum_btn2"
+                                    value='{{ fnum }}' style="position: relative;top: 120px;right: 35px;">修改
+                            </button>
                         {% endfor %}
                     {% endif %}
                     <button type="submit" name="food_ct" value="0"
-                            style="border:0;outline:none;background-color: transparent;" formaction="http://127.0.0.1:5000/search/search2">
-                        <div class="route-box" style="font-weight: bold;">+</div>
+                            style="border:0;outline:none;background-color: transparent;"
+                            formaction="http://127.0.0.1:5000/search/search2">
+                        <div class="route-box" style="font-weight: bold;"><br><br>添加食品<br>+</div>
                         <div class="route-box-bottom"></div>
                     </button>
                 </form>
             </div>
-            <div class="box-right">{{ time }}餐: <span class="empty">{{ sum_energy }} kcal</span></div>
+            <div class="box-right">摄入量: <span class="empty">{{ sum_energy }} kcal</span></div>
         </div>
     </main>
 {% endblock %}
