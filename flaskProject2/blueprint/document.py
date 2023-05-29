@@ -58,7 +58,7 @@ def document():
     if searchtype:
         session.pop('searchtype')
     if type:
-        session.pop('type')
+        session.pop('type2')
     if paixu:
         session.pop('paixu')
     return render_template("jilu.html", foods=zip(fnames, fimgs, fenergies, fnums, weights), all_energy=all_energy,

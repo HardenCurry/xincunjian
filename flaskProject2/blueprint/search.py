@@ -80,19 +80,28 @@ def search():
                         print('sx')
                         foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
                         foods, pagination = fenye(foods, g)
-                        return render_template("search1.html", food=foods, pagination=pagination, type=type)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z ,food=foods, pagination=pagination, type=type)
                     else:
                         print('jx')
                         foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist),
                                                                               Food.type2 == type).all()
                         foods, pagination = fenye(foods, g)
-                        return render_template("search1.html", food=foods, pagination=pagination, type=type)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination, type=type)
                 # 如果没有排序筛选
                 else:
                     print('没排')
                     foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
                     foods, pagination = fenye(foods, g)
-                    return render_template("search1.html", food=foods, pagination=pagination, type=type)
+                    z = 0
+                    if foods == []:
+                        z = 1
+                    return render_template("search1.html",z=z, food=foods, pagination=pagination, type=type)
             # 如果没有在分类筛选
             else:
                 print('没分')
@@ -103,18 +112,27 @@ def search():
                         print('sx')
                         foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist)).all()
                         foods, pagination = fenye(foods, g)
-                        return render_template("search1.html", food=foods, pagination=pagination)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination)
                     else:
                         print('jiang')
                         foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist)).all()
                         foods, pagination = fenye(foods, g)
-                        return render_template("search1.html", food=foods, pagination=pagination)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination)
                 # 如果没在排序筛选
                 else:
                     print('没排')
                     foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                     foods, pagination = fenye(foods, g)
-                    return render_template("search1.html", food=foods, pagination=pagination)
+                    z = 0
+                    if foods == []:
+                        z = 1
+                    return render_template("search1.html",z=z, food=foods, pagination=pagination)
         #没处于精确搜索状态
         else:
             # session['search'] = '蛋白棒'                 #测试用的
@@ -148,8 +166,24 @@ def search():
             d = list(totallist.items())
             d.sort(key=lambda x: x[1], reverse=True)
             mylist = []
+            a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+            for i in a:
+                mylist.append(i.fnum)
             for k in d:
-                mylist.append(k[0])
+                if k[0] not in mylist:
+                    mylist.append(k[0])
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
+            print(mylist)
+            foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+            foods = []
+            for i in mylist:
+                for t, k in enumerate(foods1):
+                    if i == k.fnum:
+                        foods.append(foods1[t])
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -162,18 +196,27 @@ def search():
                         print('sx')
                         foods=Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist),Food.type2 == type).all()
                         foods,pagination=fenye(foods,g)
-                        return render_template("search1.html", food=foods, pagination=pagination,type=type)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination,type=type)
                     else:
                         print('jx')
                         foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
                         foods,pagination = fenye(foods,g)
-                        return render_template("search1.html", food=foods, pagination=pagination, type=type)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination, type=type)
                 # 如果没有排序筛选
                 else:
                     print('没排')
                     foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
                     foods,pagination = fenye(foods,g)
-                    return render_template("search1.html", food=foods, pagination=pagination, type=type)
+                    z = 0
+                    if foods == []:
+                        z = 1
+                    return render_template("search1.html",z=z, food=foods, pagination=pagination, type=type)
             #如果没有在分类筛选
             else:
                 print('没分')
@@ -184,18 +227,27 @@ def search():
                         print('sx')
                         foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist)).all()
                         foods,pagination = fenye(foods,g)
-                        return render_template("search1.html", food=foods, pagination=pagination)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination)
                     else:
                         print('jiang')
                         foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist)).all()
                         foods,pagination = fenye(foods,g)
-                        return render_template("search1.html", food=foods, pagination=pagination)
+                        z = 0
+                        if foods == []:
+                            z = 1
+                        return render_template("search1.html",z=z, food=foods, pagination=pagination)
                 #如果没在排序筛选
                 else:
                     print('没排')
                     foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                     foods,pagination = fenye(foods,g)
-                    return render_template("search1.html", food=foods, pagination=pagination)
+                    z = 0
+                    if foods == []:
+                        z = 1
+                    return render_template("search1.html",z=z, food=foods, pagination=pagination)
 
 
 
@@ -246,7 +298,10 @@ def search():
                 session.pop('type2')
             if paixu:
                 session.pop('paixu')
-            return render_template("search1.html", food=foods, pagination=pagination)
+            z = 0
+            if foods == []:
+                z = 1
+            return render_template("search1.html",z=z, food=foods, pagination=pagination)
         else:
             searchtype=session.get('searchtype')
             if searchtype:
@@ -279,10 +334,24 @@ def search():
             d=list(totallist.items())
             d.sort(key=lambda x:x[1],reverse=True)
             mylist=[]
+            a=Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+            for i in a:
+                mylist.append(i.fnum)
             for k in d:
-                mylist.append(k[0])
-
-            foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                if k[0] not in mylist:
+                    mylist.append(k[0])
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
+            print(mylist)
+            foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+            foods=[]
+            for i in mylist:
+                for t,k in enumerate(foods1):
+                    if i== k.fnum:
+                        foods.append(foods1[t])
             page = 1
             # 每页显示多少条
             per_page = 10
@@ -298,7 +367,12 @@ def search():
                 session.pop('type2')
             if paixu:
                 session.pop('paixu')
-            return render_template("search1.html", food=foods, pagination=pagination)
+            print(foods)
+            z=0
+            if foods==[]:
+                z=1
+                print(z)
+            return render_template("search1.html", z=z,food=foods, pagination=pagination)
 
 
 #实现添加记录
@@ -392,20 +466,32 @@ def search1():
                                 foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist),
                                                                                 Food.type2 == type).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                             else:
                                 print('jx')
                                 foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist),
                                                                                       Food.type2 == type).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                         # 如果没有排序筛选
                         else:
                             print('没排')
                             foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist),
                                                                           Food.type2 == type).all()
                             foods, pagination = fenye(foods, g)
-                            return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                            z = 0
+                            if foods == []:
+                                z = 1
+                                print(z)
+                            return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                     # 如果没有在分类筛选
                     else:
                         print('没分')
@@ -416,18 +502,30 @@ def search1():
                                 print('sx')
                                 foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist)).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination)
                             else:
                                 print('jiang')
                                 foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist)).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination)
                         # 如果没在排序筛选
                         else:
                             print('没排')
                             foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                             foods, pagination = fenye(foods, g)
-                            return render_template("search2.html", food=foods, pagination=pagination)
+                            z = 0
+                            if foods == []:
+                                z = 1
+                                print(z)
+                            return render_template("search2.html",z=z, food=foods, pagination=pagination)
                 # 没在精确检索状态的检索
                 else:
                     d = ("/".join(jieba.lcut(session['search'], cut_all=True)))
@@ -458,8 +556,24 @@ def search1():
                         d = list(totallist.items())
                         d.sort(key=lambda x: x[1], reverse=True)
                         mylist = []
+                        a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+                        for i in a:
+                            mylist.append(i.fnum)
                         for k in d:
-                            mylist.append(k[0])
+                            if k[0] not in mylist:
+                                mylist.append(k[0])
+                        if mylist == []:
+                            content = session.get('search')
+                            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                            for k in a:
+                                mylist.append(k.fnum)
+                        print(mylist)
+                        foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+                        foods = []
+                        for i in mylist:
+                            for t, k in enumerate(foods1):
+                                if i == k.fnum:
+                                    foods.append(foods1[t])
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -473,20 +587,32 @@ def search1():
                                     foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist),
                                                                                     Food.type2 == type).all()
                                     foods, pagination = fenye(foods, g)
-                                    return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                                    z = 0
+                                    if foods == []:
+                                        z = 1
+                                        print(z)
+                                    return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                                 else:
                                     print('jx')
                                     foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist),
                                                                                           Food.type2 == type).all()
                                     foods, pagination = fenye(foods, g)
-                                    return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                                    z = 0
+                                    if foods == []:
+                                        z = 1
+                                        print(z)
+                                    return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                             # 如果没有排序筛选
                             else:
                                 print('没排')
                                 foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist),
                                                                               Food.type2 == type).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination, type=type)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination, type=type)
                         # 如果没有在分类筛选
                         else:
                             print('没分')
@@ -497,18 +623,30 @@ def search1():
                                     print('sx')
                                     foods = Food.query.order_by(Food.energy).filter(Food.fnum.in_(mylist)).all()
                                     foods, pagination = fenye(foods, g)
-                                    return render_template("search2.html", food=foods, pagination=pagination)
+                                    z = 0
+                                    if foods == []:
+                                        z = 1
+                                        print(z)
+                                    return render_template("search2.html",z=z, food=foods, pagination=pagination)
                                 else:
                                     print('jiang')
                                     foods = Food.query.order_by(desc(Food.energy)).filter(Food.fnum.in_(mylist)).all()
                                     foods, pagination = fenye(foods, g)
-                                    return render_template("search2.html", food=foods, pagination=pagination)
+                                    z = 0
+                                    if foods == []:
+                                        z = 1
+                                        print(z)
+                                    return render_template("search2.html",z=z, food=foods, pagination=pagination)
                             # 如果没在排序筛选
                             else:
                                 print('没排')
                                 foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                                 foods, pagination = fenye(foods, g)
-                                return render_template("search2.html", food=foods, pagination=pagination)
+                                z = 0
+                                if foods == []:
+                                    z = 1
+                                    print(z)
+                                return render_template("search2.html",z=z, food=foods, pagination=pagination)
             # 如果没在搜索
             else:
                 type = request.form.get('text')
@@ -645,10 +783,24 @@ def search1():
                 d = list(totallist.items())
                 d.sort(key=lambda x: x[1], reverse=True)
                 mylist = []
+                a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+                for i in a:
+                    mylist.append(i.fnum)
                 for k in d:
-                    mylist.append(k[0])
-
-                foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                    if k[0] not in mylist:
+                        mylist.append(k[0])
+                if mylist == []:
+                    content = session.get('search')
+                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                    for k in a:
+                        mylist.append(k.fnum)
+                print(mylist)
+                foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+                foods = []
+                for i in mylist:
+                    for t, k in enumerate(foods1):
+                        if i == k.fnum:
+                            foods.append(foods1[t])
                 page = 1
                 # 每页显示多少条
                 per_page = 10

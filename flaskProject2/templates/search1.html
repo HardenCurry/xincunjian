@@ -146,6 +146,9 @@
                         </h3>
                         <!-- food group 页面添加页面缓存 -->
                         <ul class="food-list">
+                            {% if z==1 %}
+                                <h2>未检索到符合条件的结果，可尝试默认的模糊检索或修改检索词如“大饼”→“饼””</h2>
+                            {% endif %}
                            {% for food in food %}
 
                                     <li class="item clearfix">
