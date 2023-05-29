@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89fcda7a-fcc2-43a1-9068-b8cc378772fb" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprint/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/search2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +160,10 @@
       <workItem from="1685334710888" duration="1219000" />
       <workItem from="1685335995347" duration="125000" />
       <workItem from="1685337033499" duration="1005000" />
-      <workItem from="1685338081691" duration="862000" />
+      <workItem from="1685338081691" duration="1263000" />
+      <workItem from="1685340014670" duration="128000" />
+      <workItem from="1685340364585" duration="25000" />
+      <workItem from="1685343807192" duration="3228000" />
     </task>
     <servers />
   </component>
@@ -177,7 +184,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject2$flaskProject2.coverage" NAME="flaskProject2 Coverage Results" MODIFIED="1685197144586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/flaskProject2$flaskProject4.coverage" NAME="flaskProject4 Coverage Results" MODIFIED="1685335886832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flaskProject2$app.coverage" NAME="app 覆盖结果" MODIFIED="1685338365130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskProject2$app.coverage" NAME="app 覆盖结果" MODIFIED="1685346674030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flaskProject2$models.coverage" NAME="models 覆盖结果" MODIFIED="1685337201088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

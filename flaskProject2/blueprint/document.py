@@ -38,7 +38,18 @@ def document():
             fnames.append(food.fname)
             fimgs.append(food.img)
             fenergies.append(food.energy)
-
+    search=session.get('search')
+    searchtype=session.get('searchtype')
+    type=session.get('type2')
+    paixu=session.get('paixu')
+    if search:
+        session.pop('search')
+    if searchtype:
+        session.pop('searchtype')
+    if type:
+        session.pop('type')
+    if paixu:
+        session.pop('paixu')
     return render_template("jilu.html", foods=zip(fnames, fimgs, fenergies, fnums, weights), all_energy=all_energy,
                            sum_energy=sum_energy, time=time)
 

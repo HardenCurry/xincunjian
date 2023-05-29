@@ -117,6 +117,7 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="查食品" aria-label="Search"
                                name="content">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="jingque" value="jingque">精确搜索</button>
                     </form>
                 </li>
             </ul>
@@ -126,7 +127,7 @@
                         <a class="nav-link" style="font-weight: bold;">{{ user.zhanghao }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('document.document')}}>记录页面</a>
+                        <a class="nav-link" href={{ url_for('document.document')}}>每日记录</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href={{ url_for('user.logout')}}>退出登录</a>
