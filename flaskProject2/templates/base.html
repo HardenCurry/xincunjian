@@ -37,7 +37,7 @@
             <ul class="navbar-nav">
                 {% if user %}
                     <li class="nav-item">
-                        <span class="nav-link" style="font-weight: bold;">{{ user.zhanghao }}</span>
+                        <a class="nav-link" style="font-weight: bold;">{{ user.zhanghao }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href={{ url_for('document.document')}}>记录页面</a>
