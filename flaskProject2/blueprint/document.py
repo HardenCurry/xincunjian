@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, session, flash, redirect, url_for, request
 import datetime
-from flask_paginate import get_page_parameter, Pagination
 from models import Food, Document
-from sqlalchemy import desc
 from exts import db
 
 bp = Blueprint("document", __name__, url_prefix="/document")
@@ -18,14 +16,18 @@ def document():
         time = '早'
     fnames = []
     fenergies = []
+    fnums = []
     sum_energy = 0
-    all_energy=0
+    all_energy = 0
     fimgs = []
+    weights = []
     if not user:
         flash('登录才能使用该功能')
     else:
         doc0 = Document.query.filter(Document.zhanghao == user).all()
         for i in doc0:
+            fnums.append(i.fnum)
+            weights.append(i.weight)
             food0 = Food.query.filter(Food.fnum == i.fnum).first()
             all_energy += int(food0.energy)
 
@@ -36,7 +38,9 @@ def document():
             fnames.append(food.fname)
             fimgs.append(food.img)
             fenergies.append(food.energy)
-    return render_template("jilu.html", foods=zip(fnames, fimgs, fenergies), all_energy=all_energy,sum_energy=sum_energy,time=time)
+
+    return render_template("jilu.html", foods=zip(fnames, fimgs, fenergies, fnums, weights), all_energy=all_energy,
+                           sum_energy=sum_energy, time=time)
 
 
 # 选好食品并存到Document中
@@ -56,3 +60,25 @@ def document1(fnum):
         db.session.add(doc)
         db.session.commit()
         return redirect(url_for('document.document'))
+
+
+# 删除记录
+@bp.route("/del_doc", methods=['POST'])
+def del_doc():
+    fnum = request.form['fnum_btn']
+    user = session.get('zhanghao')
+    del_fnum = Document.query.filter(Document.zhanghao == user).filter(Document.fnum == fnum).first()
+    db.session.delete(del_fnum)
+    db.session.commit()
+    return redirect(url_for('document.document'))
+
+
+@bp.route("/update_weight", methods=['POST', 'GET'])
+def update_weight():
+    fnum = request.form['fnum_btn2']
+    weight = request.form[f'{fnum}']
+    print(weight, fnum)
+    doc=Document.query.filter(Document.fnum==fnum).first()
+    doc.weight=weight
+    db.session.commit()
+    return redirect(url_for('document.document'))

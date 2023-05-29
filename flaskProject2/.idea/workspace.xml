@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89fcda7a-fcc2-43a1-9068-b8cc378772fb" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/templates/jilu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprint/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprint/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprint/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/8184ce625549_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/c73fdcd4215d_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/e03cc0eb21ed_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/shouye.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shouye.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +106,7 @@
       <workItem from="1685236973588" duration="226000" />
       <workItem from="1685245592487" duration="274000" />
       <workItem from="1685250872912" duration="33240000" />
+      <workItem from="1685327128274" duration="6266000" />
     </task>
     <servers />
   </component>
@@ -140,6 +126,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject2$flaskProject2.coverage" NAME="flaskProject2 Coverage Results" MODIFIED="1685197144586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flaskProject2$flaskProject4.coverage" NAME="flaskProject4 Coverage Results" MODIFIED="1685295818923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/flaskProject2$flaskProject4.coverage" NAME="flaskProject4 Coverage Results" MODIFIED="1685333331752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

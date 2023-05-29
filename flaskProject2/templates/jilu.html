@@ -2,6 +2,11 @@
 
 {% block head %}
     <title>Document</title>
+    <script>
+        function del_doc(){
+            $('#del_form').submit()
+        }
+    </script>
     <style>
         body {
             font: normal normal 100%/normal -apple-system, 'PingFang SC', 'Microsoft YaHei';
@@ -63,7 +68,8 @@
         }
 
         .box-right {
-            margin-top: 10vh;
+            position: absolute;
+            right:100px
         }
 
         .empty {
@@ -87,9 +93,9 @@
                     <button name='time' value="午">午餐</button>
                     <button name='time' value="晚">晚餐</button>
                 </form>
-                <form action="http://127.0.0.1:5000/search/search2" method="POST">
+                <form action="" method="POST">
                     {% if foods %}
-                        {% for fname,fimg,fenergy in foods %}
+                        {% for fname,fimg,fenergy,fnum,weight in foods %}
                             <button type="submit" name="food_list" disabled
                                     style="border:0;outline:none;background-color: transparent;">
                                 <div class="route-box">{{ fname }}<br>
@@ -98,10 +104,13 @@
                                 <div class="route-box-bottom">{{ fenergy }} 卡路里
                                 </div>
                             </button>
+                            <button formaction="{{ url_for('document.del_doc')}}" name="fnum_btn" value='{{ fnum }}' style="right:10px;top:5px; position: relative">X</button>
+                            <input type="number" min=0 max=10000 name={{ fnum }} value="{{ weight }}" style="position: relative;top: 120px;right: 35px;width: 60px">
+                            <button formaction="{{ url_for('document.update_weight')}}" name="fnum_btn2" value='{{ fnum }}' style="position: relative;top: 120px;right: 35px;">修改</button>
                         {% endfor %}
                     {% endif %}
                     <button type="submit" name="food_ct" value="0"
-                            style="border:0;outline:none;background-color: transparent;">
+                            style="border:0;outline:none;background-color: transparent;" formaction="http://127.0.0.1:5000/search/search2">
                         <div class="route-box" style="font-weight: bold;">+</div>
                         <div class="route-box-bottom"></div>
                     </button>
