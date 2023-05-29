@@ -166,13 +166,24 @@ def search():
             d = list(totallist.items())
             d.sort(key=lambda x: x[1], reverse=True)
             mylist = []
+            a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+            for i in a:
+                mylist.append(i.fnum)
             for k in d:
-                mylist.append(k[0])
-            if mylist==[]:
-                content=session.get('search')
-                a=Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                if k[0] not in mylist:
+                    mylist.append(k[0])
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
                 for k in a:
                     mylist.append(k.fnum)
+            print(mylist)
+            foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+            foods = []
+            for i in mylist:
+                for t, k in enumerate(foods1):
+                    if i == k.fnum:
+                        foods.append(foods1[t])
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -323,14 +334,24 @@ def search():
             d=list(totallist.items())
             d.sort(key=lambda x:x[1],reverse=True)
             mylist=[]
+            a=Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+            for i in a:
+                mylist.append(i.fnum)
             for k in d:
-                mylist.append(k[0])
+                if k[0] not in mylist:
+                    mylist.append(k[0])
             if mylist == []:
                 content = session.get('search')
                 a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
                 for k in a:
                     mylist.append(k.fnum)
-            foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+            print(mylist)
+            foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+            foods=[]
+            for i in mylist:
+                for t,k in enumerate(foods1):
+                    if i== k.fnum:
+                        foods.append(foods1[t])
             page = 1
             # 每页显示多少条
             per_page = 10
@@ -535,15 +556,24 @@ def search1():
                         d = list(totallist.items())
                         d.sort(key=lambda x: x[1], reverse=True)
                         mylist = []
+                        a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+                        for i in a:
+                            mylist.append(i.fnum)
                         for k in d:
-                            mylist.append(k[0])
-                        for k in d:
-                            mylist.append(k[0])
+                            if k[0] not in mylist:
+                                mylist.append(k[0])
                         if mylist == []:
                             content = session.get('search')
                             a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
                             for k in a:
                                 mylist.append(k.fnum)
+                        print(mylist)
+                        foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+                        foods = []
+                        for i in mylist:
+                            for t, k in enumerate(foods1):
+                                if i == k.fnum:
+                                    foods.append(foods1[t])
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -753,16 +783,24 @@ def search1():
                 d = list(totallist.items())
                 d.sort(key=lambda x: x[1], reverse=True)
                 mylist = []
+                a = Food.query.filter(Food.fname.like('{content}%'.format(content=content))).all()
+                for i in a:
+                    mylist.append(i.fnum)
                 for k in d:
-                    mylist.append(k[0])
-                for k in d:
-                    mylist.append(k[0])
+                    if k[0] not in mylist:
+                        mylist.append(k[0])
                 if mylist == []:
                     content = session.get('search')
                     a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
                     for k in a:
                         mylist.append(k.fnum)
-                foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                print(mylist)
+                foods1 = Food.query.filter(Food.fnum.in_(mylist)).order_by(Food.fnum).all()
+                foods = []
+                for i in mylist:
+                    for t, k in enumerate(foods1):
+                        if i == k.fnum:
+                            foods.append(foods1[t])
                 page = 1
                 # 每页显示多少条
                 per_page = 10
