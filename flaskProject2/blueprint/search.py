@@ -193,11 +193,11 @@ def search():
                 for t, k in enumerate(foods1):
                     if i == k.fnum:
                         foods.append(foods1[t])
-            if len(foods)<5:
-                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                for k in a:
-                    if k not in foods:
-                        foods.append(k.fnum)
+
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k not in foods:
+                    foods.append(k.fnum)
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -372,11 +372,11 @@ def search():
                 for t,k in enumerate(foods1):
                     if i== k.fnum:
                         foods.append(foods1[t])
-            if len(foods)<5:
-                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                for k in a:
-                    if k not in foods:
-                        foods.append(k.fnum)
+
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k not in foods:
+                    foods.append(k.fnum)
             page = 1
             # 每页显示多少条
             per_page = 10
@@ -606,11 +606,11 @@ def search1():
                             for t, k in enumerate(foods1):
                                 if i == k.fnum:
                                     foods.append(foods1[t])
-                        if len(foods) < 5:
-                            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                            for k in a:
-                                if k not in foods:
-                                    foods.append(k.fnum)
+
+                        a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                        for k in a:
+                            if k not in foods:
+                                foods.append(k.fnum)
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -843,11 +843,11 @@ def search1():
                     for t, k in enumerate(foods1):
                         if i == k.fnum:
                             foods.append(foods1[t])
-                if len(foods) < 5:
-                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                    for k in a:
-                        if k not in foods:
-                            foods.append(k.fnum)
+
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    if k not in foods:
+                        foods.append(k.fnum)
                 page = 1
                 # 每页显示多少条
                 per_page = 10
