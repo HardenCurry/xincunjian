@@ -197,7 +197,10 @@ def search():
             a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
             for k in a:
                 if k not in foods:
-                    foods.append(k.fnum)
+                    foods.append(k)
+            for i in foods:
+                if i.fnum not in mylist:
+                    mylist.append(i.fnum)
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -213,6 +216,7 @@ def search():
                         z = 0
                         if foods == []:
                             z = 1
+
                         return render_template("search1.html",z=z, food=foods, pagination=pagination,type=type)
                     else:
                         print('jx')
@@ -225,7 +229,12 @@ def search():
                 # 如果没有排序筛选
                 else:
                     print('没排')
-                    foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
+                    foods1 = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist), Food.type2 == type).all()
+                    foods = []
+                    for i in mylist:
+                        for t, k in enumerate(foods1):
+                            if i == k.fnum:
+                                foods.append(foods1[t])
                     foods,pagination = fenye(foods,g)
                     z = 0
                     if foods == []:
@@ -256,7 +265,12 @@ def search():
                 #如果没在排序筛选
                 else:
                     print('没排')
-                    foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                    foods1 = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                    foods = []
+                    for i in mylist:
+                        for t, k in enumerate(foods1):
+                            if i == k.fnum:
+                                foods.append(foods1[t])
                     foods,pagination = fenye(foods,g)
                     z = 0
                     if foods == []:
@@ -372,11 +386,11 @@ def search():
                 for t,k in enumerate(foods1):
                     if i== k.fnum:
                         foods.append(foods1[t])
-
+            print(foods)
             a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
             for k in a:
                 if k not in foods:
-                    foods.append(k.fnum)
+                    foods.append(k)
             page = 1
             # 每页显示多少条
             per_page = 10
@@ -610,7 +624,10 @@ def search1():
                         a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
                         for k in a:
                             if k not in foods:
-                                foods.append(k.fnum)
+                                foods.append(k)
+                        for i in foods:
+                            if i.fnum not in mylist:
+                                mylist.append(i.fnum)
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -642,8 +659,13 @@ def search1():
                             # 如果没有排序筛选
                             else:
                                 print('没排')
-                                foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist),
+                                foods1 = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist),
                                                                               Food.type2 == type).all()
+                                foods = []
+                                for i in mylist:
+                                    for t, k in enumerate(foods1):
+                                        if i == k.fnum:
+                                            foods.append(foods1[t])
                                 foods, pagination = fenye(foods, g)
                                 z = 0
                                 if foods == []:
@@ -677,7 +699,12 @@ def search1():
                             # 如果没在排序筛选
                             else:
                                 print('没排')
-                                foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                                foods1 = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
+                                foods = []
+                                for i in mylist:
+                                    for t, k in enumerate(foods1):
+                                        if i == k.fnum:
+                                            foods.append(foods1[t])
                                 foods, pagination = fenye(foods, g)
                                 z = 0
                                 if foods == []:
