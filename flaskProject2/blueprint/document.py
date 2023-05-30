@@ -32,7 +32,7 @@ def document():
     weights = []
     if not user:
         flash('登录才能使用该功能')
-        return render_template("shouye.html")
+        return render_template('shouye.html')
     else:
         # all_energy 计算总卡路里
         doc0 = Document.query.filter(Document.zhanghao == user).all()
@@ -76,6 +76,7 @@ def document1(fnum):
     session['time']=time
     if not user:
         flash('登录才能使用该功能')
+        return render_template('shouye.html')
     else:
         date = datetime.datetime.now()
         x = '{:%Y-%m-%d}'.format(date)
