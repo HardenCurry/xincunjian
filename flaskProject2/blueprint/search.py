@@ -70,10 +70,11 @@ def search():
             mylist = []
             for k in d:
                 mylist.append(k[0])
-            if mylist == []:
-                content = session.get('search')
-                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                for k in a:
+
+            content = session.get('search')
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k.fnum not in mylist:
                     mylist.append(k.fnum)
             type = session.get('type2')
             paixu = session.get('paixu')
@@ -310,10 +311,10 @@ def search():
             mylist = []
             for k in d:
                 mylist.append(k[0])
-            if mylist == []:
-                content = session.get('search')
-                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                for k in a:
+            content = session.get('search')
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k.fnum not in mylist:
                     mylist.append(k.fnum)
             foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
             page = 1
@@ -493,10 +494,10 @@ def search1():
                     mylist = []
                     for k in d:
                         mylist.append(k[0])
-                    if mylist == []:
-                        content = session.get('search')
-                        a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                        for k in a:
+                    content = session.get('search')
+                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                    for k in a:
+                        if k.fnum not in mylist:
                             mylist.append(k.fnum)
                     type = session.get('type2')
                     paixu = session.get('paixu')
@@ -801,10 +802,10 @@ def search1():
                 mylist = []
                 for k in d:
                     mylist.append(k[0])
-                if mylist == []:
-                    content = session.get('search')
-                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
-                    for k in a:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    if k.fnum not in mylist:
                         mylist.append(k.fnum)
                 foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                 page = 1
