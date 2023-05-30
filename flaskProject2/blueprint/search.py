@@ -30,6 +30,7 @@ def search():
     type = request.form.get('text')
     paixu = request.form.get('paixu')
     jingque=request.form.get('jingque')
+    print(jingque)
     if jingque:
         session['searchtype']=jingque
     g=0
@@ -43,6 +44,7 @@ def search():
     if content is None:
         #判读是否处于精确检索状态
         searchtype = session.get('searchtype')
+        print('pdjqq',searchtype)
         if searchtype:
             a = Fencifanwei.query.filter(Fencifanwei.word.like(session['search'])).all()
             totallist = {}
@@ -68,6 +70,11 @@ def search():
             mylist = []
             for k in d:
                 mylist.append(k[0])
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
             type = session.get('type2')
             paixu = session.get('paixu')
             # 如果有在分类筛选
@@ -135,9 +142,11 @@ def search():
                     return render_template("search1.html",z=z, food=foods, pagination=pagination)
         #没处于精确搜索状态
         else:
+            print('没精确')
             # session['search'] = '蛋白棒'                 #测试用的
             # session.permanent = True
             # 实现在检索页翻页
+            content=session.get('search')
             d = ("/".join(jieba.lcut(session['search'], cut_all=True)))
             word = d.split("/")
             print(word)
@@ -184,6 +193,11 @@ def search():
                 for t, k in enumerate(foods1):
                     if i == k.fnum:
                         foods.append(foods1[t])
+
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k not in foods:
+                    foods.append(k.fnum)
             type=session.get('type2')
             paixu=session.get('paixu')
             #如果有在分类筛选
@@ -282,6 +296,11 @@ def search():
             mylist = []
             for k in d:
                 mylist.append(k[0])
+            if mylist == []:
+                content = session.get('search')
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    mylist.append(k.fnum)
             foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
             page = 1
             # 每页显示多少条
@@ -306,6 +325,7 @@ def search():
             searchtype=session.get('searchtype')
             if searchtype:
                 session.pop('searchtype')
+            print(searchtype)
             d = ("/".join(jieba.lcut(content, cut_all=True)))
             word= d.split("/")
             print(word)
@@ -352,6 +372,11 @@ def search():
                 for t,k in enumerate(foods1):
                     if i== k.fnum:
                         foods.append(foods1[t])
+
+            a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+            for k in a:
+                if k not in foods:
+                    foods.append(k.fnum)
             page = 1
             # 每页显示多少条
             per_page = 10
@@ -428,6 +453,7 @@ def search1():
             if search:
                 # 判断检索状态
                 searchtype = session.get('searchtype')
+                print(searchtype)
                 if searchtype:
                     a = Fencifanwei.query.filter(Fencifanwei.word.like(session['search'])).all()
                     totallist = {}
@@ -453,6 +479,11 @@ def search1():
                     mylist = []
                     for k in d:
                         mylist.append(k[0])
+                    if mylist == []:
+                        content = session.get('search')
+                        a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                        for k in a:
+                            mylist.append(k.fnum)
                     type = session.get('type2')
                     paixu = session.get('paixu')
                     # 如果有在分类筛选
@@ -528,6 +559,7 @@ def search1():
                             return render_template("search2.html",z=z, food=foods, pagination=pagination)
                 # 没在精确检索状态的检索
                 else:
+                    content=session.get('search')
                     d = ("/".join(jieba.lcut(session['search'], cut_all=True)))
                     word = d.split("/")
                     print(word)
@@ -574,6 +606,11 @@ def search1():
                             for t, k in enumerate(foods1):
                                 if i == k.fnum:
                                     foods.append(foods1[t])
+
+                        a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                        for k in a:
+                            if k not in foods:
+                                foods.append(k.fnum)
                         type = session.get('type2')
                         paixu = session.get('paixu')
                         # 如果有在分类筛选
@@ -737,6 +774,11 @@ def search1():
                 mylist = []
                 for k in d:
                     mylist.append(k[0])
+                if mylist == []:
+                    content = session.get('search')
+                    a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                    for k in a:
+                        mylist.append(k.fnum)
                 foods = Food.query.order_by(Food.fnum).filter(Food.fnum.in_(mylist)).all()
                 page = 1
                 # 每页显示多少条
@@ -801,6 +843,11 @@ def search1():
                     for t, k in enumerate(foods1):
                         if i == k.fnum:
                             foods.append(foods1[t])
+
+                a = Food.query.filter(Food.fname.like('%{content}%'.format(content=content))).all()
+                for k in a:
+                    if k not in foods:
+                        foods.append(k.fnum)
                 page = 1
                 # 每页显示多少条
                 per_page = 10
