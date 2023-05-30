@@ -14,7 +14,7 @@
                 <form method="POST">
                     <div class="form-group">
                         <label for="exampleInputEmail1">账号</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="zhanghao">
+                        <input type="text" minlength="3" maxlength="12" class="form-control" id="exampleInputEmail1" name="zhanghao">
                     </div>
                     <div class="form-group"></div>
                         <label for="exampleInputEmail1">性别</label>
@@ -22,15 +22,15 @@
                         <small id="emailHelp" class="form-text text-muted">添写 ‘男’，‘女’，‘其他’</small>
                     <div class="form-group">
                         <label for="exampleInputEmail1">电话号码</label>
-                        <input type="tel" class="form-control" id="" name="phone">
+                        <input type="tel" class="form-control" id="" name="phone" minlength="11" maxlength="11">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">密码</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" minlength="4" maxlength="12">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">确认密码</label>
-                        <input type="password" class="form-control" name="password_confirm">
+                        <input type="password" class="form-control" name="password_confirm" minlength="4" maxlength="12">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">立即注册</button>
                 </form>

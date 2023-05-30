@@ -78,7 +78,6 @@ def document1():
         return render_template("index1.html", food=foods, pagination=pagination, type=type)
     #如果没有点击分类
     else:
-
         print('2')
         type = session.get('type2')
         if type:
