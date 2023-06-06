@@ -49,6 +49,10 @@ class Food(db.Model):
     link = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'))
     img = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'))
     energy = db.Column(db.Integer)
+    ts = db.Column(db.Integer)
+    zf = db.Column(db.Integer)
+    dbz = db.Column(db.Integer)
+    qws = db.Column(db.Integer)
 #
 # class Jiansuo(db.Model):
 #     __tablename__ = 'jiansuo'

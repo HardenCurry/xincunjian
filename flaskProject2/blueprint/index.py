@@ -50,6 +50,7 @@ def document():
 @bp.route("/index1", methods=['POST', 'GET'])
 def document1():
     type=request.form.get('text')
+    type1=request.form.get('type1')
     paixu=request.form.get('paixu')
     g = 0
     if type:
@@ -57,6 +58,9 @@ def document1():
         g = 1
     if paixu:
         session['paixu'] = paixu
+        g = 1
+    if type1:
+        session['type1'] = type1
         g = 1
     #如果现在点击分类
     if type:
@@ -79,39 +83,86 @@ def document1():
     #如果没有点击分类
     else:
         print('2')
-        type = session.get('type2')
-        if type:
-            type = type
-            g = 0
-        else:
-            type = '主食'
-            g=1
-        #如果现在有点击排序
-        if paixu!=None:
-            g=1
-            print('px')
-            if paixu=='升序':
-                session['paixu'] = paixu
+        #如果点击原料分类
+        if type1:
+            if type:
+                session['type1'] = type1
                 session.permanent = True
-                foods=Food.query.filter(Food.type2 == type).order_by(Food.energy)
+            type = session.get('type2')
+            if type:
+                type = type
+                g = 0
             else:
-                session['paixu'] = paixu
-                session.permanent = True
-                foods= Food.query.filter(Food.type2 == type).order_by(desc(Food.energy))
-        #如果没有点击排序但之前有
+                type = '主食'
+                g=1
+            #如果现在有点击排序
+            if paixu!=None:
+                g=1
+                print('px')
+                if paixu=='升序':
+                    session['paixu'] = paixu
+                    session.permanent = True
+                    foods=Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(Food.energy)
+
+                else:
+                    session['paixu'] = paixu
+                    session.permanent = True
+                    foods= Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(desc(Food.energy))
+            #如果没有点击排序但之前有
+            else:
+                paixu=session.get('paixu')
+
+                if paixu == '升序':
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(Food.energy)
+                    g=0
+                elif paixu=='降序':
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(desc(Food.energy))
+                    g=0
+                else:
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1)
+                    g=0
+        #没点击原料分类
         else:
-            paixu=session.get('paixu')
-
-            if paixu == '升序':
-                foods = Food.query.filter(Food.type2 == type).order_by(Food.energy)
-                g=0
-            elif paixu=='降序':
-                foods = Food.query.filter(Food.type2 == type).order_by(desc(Food.energy))
-                g=0
+            type1=session.get('type1')
+            if type1:
+                type1 = type1
+                g = 0
             else:
-                foods = Food.query.filter(Food.type2 == type)
-                g=0
+                type = '%'
+                g=1
+            type = session.get('type2')
+            if type:
+                type = type
+                g = 0
+            else:
+                type = '主食'
+                g=1
+            #如果现在有点击排序
+            if paixu!=None:
+                g=1
+                print('px')
+                if paixu=='升序':
+                    session['paixu'] = paixu
+                    session.permanent = True
+                    foods=Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(Food.energy)
+                    print(foods)
+                else:
+                    session['paixu'] = paixu
+                    session.permanent = True
+                    foods= Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(desc(Food.energy))
+            #如果没有点击排序但之前有
+            else:
+                paixu=session.get('paixu')
 
+                if paixu == '升序':
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(Food.energy)
+                    g=0
+                elif paixu=='降序':
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1).order_by(desc(Food.energy))
+                    g=0
+                else:
+                    foods = Food.query.filter(Food.type2 == type,Food.type1==type1)
+                    g=0
 
         foods,pagination=fenye(foods,g)
         return render_template("index1.html", food=foods, pagination=pagination, type=type)

@@ -116,7 +116,7 @@
                     <form class="form-inline my-2 my-lg-0" method="POST" action="http://127.0.0.1:5000/search/search2">
                         <input class="form-control mr-sm-2" type="search" placeholder="查食品" aria-label="Search"
                                name="content">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">模糊搜索</button>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="jingque" value="jingque">精确搜索</button>
                     </form>
                 </li>
@@ -162,6 +162,8 @@
                 <div class="widget-group-content container">
                     <h2 class="crumb"><a href="/food/">知卡知热</a> / <span id="text1">主食</span>
                         <form  action="" method='POST' style="position: absolute; right:5%;">
+                              <button type="submit" name="type1" value="原材料" style="border:0;outline:none;background-color: transparent;">原材料</button>
+                         <button type="submit" name="type1" value="其它" style="border:0;outline:none;background-color: transparent;">成品</button>
                          按热量排序:
                          <button type="submit" name="paixu" value="升序" style="border:0;outline:none;background-color: transparent;">↑</button>
                          <button type="submit" name="paixu" value="降序" style="border:0;outline:none;background-color: transparent;">↓</button>
@@ -172,8 +174,8 @@
                         <h3>常见食物分类</h3>
                         <form action="" class="group-list" method='POST'>
                             <li><a onclick="liClick('主食')" class="g1"><button type="submit" name="text" value="主食" style="border:0;outline:none;background-color: transparent;">主食</button></a></li>
-                            <li><a onclick="liClick('肉类蛋类及制品')" class="g2"><button type="submit" name="text" value="肉类蛋类及制品" style="border:0;outline:none;background-color: transparent;">蛋类、肉类及制品</button></a></li>
-                            <li><a onclick="liClick('坚果豆类奶类')" class="g3"><button type="submit"name="text" value="坚果豆类奶类" style="border:0;outline:none;background-color: transparent;">坚果豆类奶类</button></a></li>
+                            <li><a onclick="liClick('肉类蛋类及制品')" class="g2"><button type="submit" name="text" value="肉类蛋类及奶类" style="border:0;outline:none;background-color: transparent;">肉类蛋类及奶类</button></a></li>
+                            <li><a onclick="liClick('坚果豆类奶类')" class="g3"><button type="submit"name="text" value="坚果及豆类" style="border:0;outline:none;background-color: transparent;">坚果及豆类</button></a></li>
                             <li><a onclick="liClick('水果')" class="g4"><button type="submit" name="text" value="水果" style="border:0;outline:none;background-color: transparent;">水果</button></a></li>
                             <li><a onclick="liClick('蔬菜及菌藻')" class="g5"><button type="submit" name="text" value="蔬菜及菌藻" style="border:0;outline:none;background-color: transparent;">蔬菜及菌藻</button></a></li>
                             <li><a onclick="liClick('调味品')" class="g6"><button type="submit" name="text" value="调味品" style="border:0;outline:none;background-color: transparent;">调味品</button></a></li>
