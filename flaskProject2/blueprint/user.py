@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session,flash,request
+from flask import Blueprint, render_template, redirect, url_for, session, flash, request
 from exts import db
 from .forms import RegisterForm, LoginForm
 from models import User
@@ -17,13 +17,13 @@ def login():
         if form.validate():
             zhanghao = form.zhanghao.data
             password = form.password.data
-            #账号是唯一的
+            # 账号是唯一的
             user = User.query.get(zhanghao)
             if not user:
                 flash('账号不在数据库')
                 return redirect(url_for('user.login'))
             if check_password_hash(user.password, password):
-                #使用cookie
+                # 使用cookie
                 session['zhanghao'] = user.zhanghao
                 return redirect('/')
             else:
@@ -41,22 +41,32 @@ def register():
     else:
         form = RegisterForm(request.form)
         if form.validate():
-            zhanghao = form.zhanghao.data
-            if not User.query.get(zhanghao):
-                password = form.password.data
-                gender = form.gender.data
-                phone = form.phone.data
-                user = User(zhanghao=zhanghao, gender=gender, phone=phone, password=generate_password_hash(password))
-                db.session.add(user)
-                db.session.commit()
-                flash('注册成功')
-                return redirect(url_for("user.login"))
+            gender = form.gender.data
+            if gender == '男' or gender == '女':
+                zhanghao = form.zhanghao.data
+                if not User.query.get(zhanghao):
+                    password = form.password.data
+                    age = form.age.data
+                    bweight = form.bweight.data
+                    height = form.height.data
+                    phone = form.phone.data
+                    user = User(zhanghao=zhanghao, gender=gender, age=age, bweight=bweight, height=height, phone=phone,
+                                password=generate_password_hash(password))
+                    db.session.add(user)
+                    db.session.commit()
+                    flash('注册成功')
+                    return redirect(url_for("user.login"))
+                else:
+                    flash('本账号已存在，请重新设置')
+                    return redirect(url_for("user.register"))
             else:
-                flash('本账号已存在，请重新设置')
+                flash('性别只能填男或女')
                 return redirect(url_for("user.register"))
         else:
             flash('{}'.format(form.errors))
             return redirect(url_for("user.register"))
+
+
 @bp.route('/logout')
 def logout():
     session.clear()

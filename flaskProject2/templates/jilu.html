@@ -83,6 +83,30 @@
     <header>
         <span id="title">每日摄入记录</span>
         <span id="side">总计 ：{{ all_energy }} kcal</span>
+        <form action={{ url_for('document.update_userinfo' ) }} method="POST"
+              style="position: absolute;left: 85px;top: 170px">
+            年龄:
+            <input type="number" min=1 max=100 name="age" value="{{ info['age'] }}"
+                   style="position: relative;width:50px;">
+            体重:
+            <input type="number" min=5 max=200 name="bweight" value="{{ info['bweight'] }}"
+                   style="position: relative;width:50px">
+            身高:
+            <input type="number" min=40 max=200 name="height" value="{{ info['height'] }}"
+                   style="position: relative;width:50px">
+            运动系数:
+            <select name="coef">
+                <option value=1.0 {{ selected[0] }}>什么都不干</option>
+                <option value=1.2 {{ selected[1] }}>正常学习但不运动</option>
+                <option value=1.4 {{ selected[2] }}>正常学习适量运动</option>
+                <option value=1.6 {{ selected[3] }}>每天规律举铁训练</option>
+                <option value=1.8 {{ selected[4] }}>体力活职业+规律训练</option>
+                <option value=2.0 {{ selected[4] }}>超频重体力活+高强度训练</option>
+            </select>
+            <button style="position: relative;">修改
+            </button>
+            BMR:{{ target }}
+        </form>
     </header>
     <main>
         <div class="box">
@@ -107,7 +131,8 @@
                             </button>
 
                             <button formaction="{{ url_for('document.del_doc') }}" name="fnum_btn" value='{{ fnum }}'
-                                    style="right:10px;top:2px; position: relative;border-radius:7px;background: white;font-weight: bold;">X
+                                    style="right:10px;top:2px; position: relative;border-radius:7px;background: white;font-weight: bold;">
+                                X
                             </button>
                             <input type="number" min=0 max=10000 name={{ fnum }} value="{{ weight }}"
                                    style="position: relative;top: 120px;right: 35px;width: 60px">
