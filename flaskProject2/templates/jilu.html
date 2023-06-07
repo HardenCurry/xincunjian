@@ -2,11 +2,6 @@
 
 {% block head %}
     <title>Document</title>
-    <script>
-        function del_doc() {
-            $('#del_form').submit()
-        }
-    </script>
     <style>
         body {
             font: normal normal 100%/normal -apple-system, 'PingFang SC', 'Microsoft YaHei';
@@ -61,13 +56,14 @@
             border-top: 0;
             padding-top: 0vw;
             width: 10vw;
-            height: 2vw;
+            height: 1.35vw;
             background-color: lightgray;
+            font-size: 0.9vw;
         }
 
         .box-right {
-            position: absolute;
-            right: 100px
+            position: relative;
+        {#right: 100px#}
         }
 
         .empty {
@@ -101,12 +97,19 @@
                 <option value=1.4 {{ selected[2] }}>正常学习适量运动</option>
                 <option value=1.6 {{ selected[3] }}>每天规律举铁训练</option>
                 <option value=1.8 {{ selected[4] }}>体力活职业+规律训练</option>
-                <option value=2.0 {{ selected[4] }}>超频重体力活+高强度训练</option>
+                <option value=2.0 {{ selected[5] }}>超频重体力活+高强度训练</option>
+            </select>
+            目的:
+            <select name="purpose">
+                <option value=1.0 {{ selected2[0] }}>维持</option>
+                <option value=0.85 {{ selected2[1] }}>减脂</option>
+                <option value=1.15 {{ selected2[2] }}>增肌</option>
             </select>
             <button style="position: relative;">修改
             </button>
-            BMR:{{ target }}
+            推荐摄入:{{ kcal_recommend }}kcal；{{ tishi }}kcal
         </form>
+
     </header>
     <main>
         <div class="box">
@@ -120,13 +123,19 @@
                 </form>
                 <form action="" method="POST">
                     {% if foods %}
-                        {% for fname,fimg,fenergy,fnum,weight in foods %}
+                        {% for fname,fimg,fenergy,fts,fdbz,fzf,fnum,weight in foods %}
                             <button type="submit" name="food_list" disabled
                                     style="border:0;outline:none;background-color: transparent;">
                                 <div class="route-box" style="color: black">{{ fname }}<br>
                                     <img width='70px' src={{ fimg }}>
                                 </div>
-                                <div class="route-box-bottom" style="color: black">{{ fenergy }} 卡路里
+                                <div class="route-box-bottom" style="color: black">热量:{{ fenergy }}kcal
+                                </div>
+                                <div class="route-box-bottom" style="color: black">碳水:{{ fts }}g
+                                </div>
+                                <div class="route-box-bottom" style="color: black">蛋白质:{{ fdbz }}g
+                                </div>
+                                <div class="route-box-bottom" style="color: black">脂肪:{{ fzf }}g
                                 </div>
                             </button>
 
@@ -149,7 +158,14 @@
                     </button>
                 </form>
             </div>
-            <div class="box-right">{{ time }}餐摄入量: <span class="empty">{{ sum_energy }} kcal</span></div>
+            <div style="position: absolute;right:100px">{{ time }}餐总热量: <span class="empty">{{ sums['energy'] }} kcal</span>
+            </div>
+            <div style="position: absolute;right:100px;top: 255px">总碳水: <span
+                    class="empty">{{ sums['ts'] }} g</span></div>
+            <div style="position: absolute;right:100px;top: 286px">总蛋白质: <span
+                    class="empty">{{ sums['dbz'] }} g</span></div>
+            <div style="position: absolute;right:100px;top: 317px">总脂肪: <span
+                    class="empty">{{ sums['zf'] }} g</span></div>
         </div>
     </main>
 {% endblock %}

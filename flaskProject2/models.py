@@ -23,7 +23,7 @@ class Document(db.Model):
     date = db.Column(db.DateTime)   
     fnum = db.Column(db.String(255))
     weight = db.Column(db.Integer)
-    zhanghao = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'), index=True)
+    zhanghao = db.Column(db.String(255, 'utf8mb4_0900_ai_ci'))
 
 
 class Fencibiao(db.Model):
