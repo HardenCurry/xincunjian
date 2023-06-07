@@ -459,7 +459,9 @@ def search1():
 
     if type:
         session['type2']=type
-        session.pop('type1')
+        s=session.get('type1')
+        if s:
+            session.pop('type1')
         g=1
     if type1:
         session['type1'] = type1
