@@ -9,6 +9,10 @@ class User(db.Model):
     gender = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    bweight = db.Column(db.Integer, nullable=False)
+    height = db.Column(db.Integer, nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+
 
 
 class Document(db.Model):
